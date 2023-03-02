@@ -1,6 +1,6 @@
 <template>
-  <p>Books amout: {{ books.length }}</p>
-  <p>Books price: {{ totalBooksPrice() }}</p>
+  <p>Books amount: {{ books.length }}</p>
+  <p>Books price: {{ totalBooksPrice }}</p>
 </template>
 
 <script>
@@ -12,11 +12,14 @@ export default {
       required: true
     }
   },
-  methods: {
+  computed: {
     totalBooksPrice () {
-      return this.books.reduce((total, book) => total + book.price, 0)
+      const total = this.books.reduce(
+        (acc, book) => acc + parseFloat(book.price.slice(1)),
+        0
+      )
+      return total.toFixed(2)
     }
   }
 }
-
 </script>
